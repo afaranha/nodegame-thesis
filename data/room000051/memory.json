@@ -1,0 +1,2 @@
+{"offer":"Medium","time":2212,"timeup":false,"role":"DICTATOR","partner":"325324984401885","stepId":"bidder","stageId":"game","done":true,"player":"660862300008060","stage":{"stage":1,"step":1,"round":1},"timestamp":1648503390643,"session":"room000051","treatment":"pressure"}
+{"time":10001,"timeup":true,"role":"OBSERVER","partner":"660862300008060","stepId":"bidder","stageId":"game","done":true,"player":"325324984401885","stage":{"stage":1,"step":1,"round":1},"timestamp":1648503399418,"session":"room000051","treatment":"pressure"}

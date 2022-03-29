@@ -1,0 +1,22 @@
+<!doctype html>
+<title>Game</title>
+<link rel="stylesheet" href="/lib/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="/stylesheets/nodegame.css" />
+<link rel="stylesheet" href="css/style.css" />
+<body>
+  <div id="container">
+    <h2>Game</h2>
+    <div id="dictator" style="display: none"></div>
+
+    <div id="observer" style="display: none">
+      <!-- <h4 id="waitingFor">Waiting for an offer<span id="dots"></span></h4> -->
+      <h4 id="waitingFor">The dictator made an offer</h4>
+      <div id="history"></div>
+      <br/>
+    </div>
+    <div id="make_decision" style="display: none">
+        <input type="button" value="Accept" id="accept" class="btn"/>
+        <input type="button" value="Reject" id="reject" class="btn"/>
+    </div>
+  </div>
+</body>

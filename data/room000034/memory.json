@@ -1,0 +1,8 @@
+{"time":3932,"timeup":false,"stepId":"bidder","stageId":"game","done":true,"player":"617365488218661","stage":{"stage":1,"step":1,"round":1},"timestamp":1648501800551,"session":"room000034","treatment":"standard"}
+{"time":1073,"timeup":false,"stepId":"responder","stageId":"game","done":true,"player":"617365488218661","stage":{"stage":1,"step":2,"round":1},"timestamp":1648501801634,"session":"room000034","treatment":"standard"}
+{"time":4695,"timeup":false,"stepId":"bidder","stageId":"game","done":true,"player":"617365488218661","stage":{"stage":1,"step":1,"round":2},"timestamp":1648501806339,"session":"room000034","treatment":"standard"}
+{"time":3774,"timeup":false,"stepId":"responder","stageId":"game","done":true,"player":"617365488218661","stage":{"stage":1,"step":2,"round":2},"timestamp":1648501810126,"session":"room000034","treatment":"standard"}
+{"time":4586,"timeup":false,"stepId":"bidder","stageId":"game","done":true,"player":"617365488218661","stage":{"stage":1,"step":1,"round":3},"timestamp":1648501814723,"session":"room000034","treatment":"standard"}
+{"time":3528,"timeup":false,"stepId":"responder","stageId":"game","done":true,"player":"617365488218661","stage":{"stage":1,"step":2,"round":3},"timestamp":1648501818260,"session":"room000034","treatment":"standard"}
+{"time":3535,"timeup":false,"stepId":"bidder","stageId":"game","done":true,"player":"617365488218661","stage":{"stage":1,"step":1,"round":4},"timestamp":1648501821806,"session":"room000034","treatment":"standard"}
+{"time":2063,"timeup":false,"stepId":"responder","stageId":"game","done":true,"player":"617365488218661","stage":{"stage":1,"step":2,"round":4},"timestamp":1648501823880,"session":"room000034","treatment":"standard"}

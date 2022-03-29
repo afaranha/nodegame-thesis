@@ -1,0 +1,9 @@
+{"time":3531,"timeup":false,"stepId":"bidder","stageId":"game","done":true,"player":"900911427828356","stage":{"stage":1,"step":1,"round":1},"timestamp":1648501804053,"session":"room000035","treatment":"pressure"}
+{"time":4660,"timeup":false,"stepId":"responder","stageId":"game","done":true,"player":"900911427828356","stage":{"stage":1,"step":2,"round":1},"timestamp":1648501808723,"session":"room000035","treatment":"pressure"}
+{"time":3984,"timeup":false,"stepId":"bidder","stageId":"game","done":true,"player":"900911427828356","stage":{"stage":1,"step":1,"round":2},"timestamp":1648501812717,"session":"room000035","treatment":"pressure"}
+{"time":4310,"timeup":false,"stepId":"responder","stageId":"game","done":true,"player":"900911427828356","stage":{"stage":1,"step":2,"round":2},"timestamp":1648501817035,"session":"room000035","treatment":"pressure"}
+{"time":1526,"timeup":false,"stepId":"bidder","stageId":"game","done":true,"player":"900911427828356","stage":{"stage":1,"step":1,"round":3},"timestamp":1648501818568,"session":"room000035","treatment":"pressure"}
+{"time":4975,"timeup":false,"stepId":"responder","stageId":"game","done":true,"player":"900911427828356","stage":{"stage":1,"step":2,"round":3},"timestamp":1648501823556,"session":"room000035","treatment":"pressure"}
+{"time":1410,"timeup":false,"stepId":"bidder","stageId":"game","done":true,"player":"900911427828356","stage":{"stage":1,"step":1,"round":4},"timestamp":1648501824975,"session":"room000035","treatment":"pressure"}
+{"time":1238,"timeup":false,"stepId":"responder","stageId":"game","done":true,"player":"900911427828356","stage":{"stage":1,"step":2,"round":4},"timestamp":1648501826223,"session":"room000035","treatment":"pressure"}
+{"time":1473,"timeup":false,"stepId":"end","stageId":"end","done":true,"player":"900911427828356","stage":{"stage":2,"step":1,"round":1},"timestamp":1648501827711,"session":"room000035","treatment":"pressure"}
