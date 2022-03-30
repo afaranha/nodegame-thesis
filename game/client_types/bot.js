@@ -37,7 +37,7 @@ module.exports = function(treatmentName, settings, stager,
                     node.on.data('decision', function(msg) {
                         // Store last offer.
                         node.game.offer = msg.data;
-                        node.timer.random(3000).done();
+                        node.done({ response: 'accepted', offer: msg.data.offer, final_offer: msg.data.offer });
                     });
                 }
             }

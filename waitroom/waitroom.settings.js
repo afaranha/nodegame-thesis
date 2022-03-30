@@ -45,7 +45,7 @@ module.exports = {
      *
      * Default: GROUP_SIZE
      */
-    // POOL_SIZE: 2,
+    // POOL_SIZE: 4,
 
     /**
      * ## N_GAMES (number) Optional
@@ -241,11 +241,11 @@ module.exports = {
      * Receives as first parameter the waiting room object itself and as
      * second parameter the connecting client.
      */
-     // ON_CONNECT: function(waitRoom, player) {
-     //     // Auto play with bots on connect of a human player.
-     //     if (player.clientType === 'bot') return;
-     //     waitRoom.dispatchWithBots();
-     // },
+     ON_CONNECT: function(waitRoom, player) {
+         // Auto play with bots on connect of a human player.
+         if (player.clientType === 'bot') return;
+         waitRoom.dispatchWithBots();
+     },
 
     /**
      * ## ON_DISCONNECT (function) Optional
@@ -500,7 +500,7 @@ module.exports = {
      *
      * A button is added to the interface.
      */
-    ALLOW_PLAY_WITH_BOTS: false,
+    ALLOW_PLAY_WITH_BOTS: true,
 
     /** ### ALLOW_SELECT_TREATMENT
      *

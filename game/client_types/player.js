@@ -27,6 +27,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         this.doneButton = node.widgets.append('DoneButton', header);
 
         this.decision_table = {};
+        this.offers_table = [];
     });
 
     stager.extendStep('instructions', {
@@ -123,6 +124,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 }
             },
             OBSERVER: {
+                init: function() {
+                    node.game.offerReceived = null;
+                    // node.game.offer_response = false;
+                },
                 frame: 'game.htm',
                 timer: settings.bidTime,
                 donebutton: false,
@@ -138,50 +143,96 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         // this.offer = msg.data
                         console.log("============== RECEIVED");
                         console.log(msg);
-                        let offer = msg.data.offer
+                        console.log(node.game);
+                        console.log(msg.data.offers_table);
+                        node.game.offerReceived = msg.data;
+                        node.game.offer_accepted = false;
+
+                        let offer = msg.data.offer;
+                        let dictator = msg.data.player;
+                        let offers_table = msg.data.offers_table;
+                        console.log(offers_table)
 
                         node.game.doneButton.enable();
                         W.show('make_decision');
-                        if (node.game.decision_table[msg.data.player]) {
-                            let text = "The quality of offers this banker sent you was: "
-                            W.setInnerHTML('history', text + node.game.decision_table[msg.data.player].toString());
+                        let text = dictator + " sent you an offer. The offers that you accepted from this banker was:";
+                        W.setInnerHTML('history_text', text);
+
+                        let table_history = "<tr><td>BANKER</td><td>OFFER HISTORY</td></tr>";
+                        for (const [player_id, offer_history] of Object.entries(offers_table)) {
+                            var tr = "<tr>";
+
+                            tr += "<td>" + player_id + "</td><td>" + offer_history.toString() + "</td></tr>";
+                            table_history += tr;
                         }
+                        W.setInnerHTML('history', table_history);
+
+                        // if (node.game.decision_table[msg.data.player]) {
+                        //     // let text = "The quality of offers this banker sent you was: "
+                        //     let text = dictator + " sent you an offer. The offers that you accepted from this banker was:";
+                        //     W.setInnerHTML('history', text + node.game.decision_table[msg.data.player].toString());
+                        // }
 
                         W.gid('accept').onclick = function() {
-                            if (!(msg.data.player in node.game.decision_table)) {
-                                node.game.decision_table[msg.data.player] = []
-                            }
-
-                            node.game.decision_table[msg.data.player].push(offer);
-                            node.done({ response: 'accepted', offer: offer, final_offer: offer });
+                            node.game.offer_accepted = true;
+                            node.done({test: false});
+                            // if (!(msg.data.player in node.game.decision_table)) {
+                            //     node.game.decision_table[msg.data.player] = []
+                            // }
+                            //
+                            // node.game.decision_table[msg.data.player].push(offer);
+                            // node.done({ response: 'accepted', offer: offer, final_offer: offer });
                         };
 
                         W.gid('reject').onclick = function() {
-                            console.log("REJECTED!!!");
-                            console.log(msg.data);
-
-                            const offers = ["Bad", "Medium", "Good"];
-                            var new_offers = [];
-                            for (const o of offers) {
-                                if (o !== offer) {
-                                    new_offers.push(o);
-                                }
-                            }
-                            console.log("====================== OFFERS");
-                            console.log(msg.data);
-                            console.log(new_offers);
-                            var new_offer = new_offers[Math.floor(Math.random()*new_offers.length)];
-
-
-                            // new_offers.random();
+                            node.game.offer_accepted = false;
+                            node.done({test: false});
+                            // console.log("REJECTED!!!");
+                            // console.log(msg.data);
+                            //
+                            // const offers = ["Bad", "Medium", "Good"];
+                            // var new_offers = [];
+                            // for (const o of offers) {
+                            //     if (o !== offer) {
+                            //         new_offers.push(o);
+                            //     }
+                            // }
+                            // console.log("====================== OFFERS");
+                            // console.log(msg.data);
                             // console.log(new_offers);
-                            // offer = new_offers[0];
-                            console.log(new_offer);
-                            // node.done({ response: 'rejected', final_offer: offer })
-                            node.done({ response: 'rejected', offer: offer, final_offer: new_offer });
+                            // var new_offer = new_offers[Math.floor(Math.random()*new_offers.length)];
+                            //
+                            //
+                            // // new_offers.random();
+                            // // console.log(new_offers);
+                            // // offer = new_offers[0];
+                            // console.log(new_offer);
+                            // // node.done({ response: 'rejected', final_offer: offer })
+                            // node.done({ response: 'rejected', offer: offer, final_offer: new_offer });
                         };
                     });
-                }
+                },
+                done: function(msg) {
+                    console.log("=========== DONE WAS PRESSED!");
+                    console.log(msg);
+                    let offer = node.game.offerReceived.offer;
+                    console.log(node.game.offerReceived);
+
+                    if (node.game.offer_accepted) {
+                        return { response: 'accepted', offer: offer, final_offer: offer };
+                    } else {
+                        const offers = ["Bad", "Medium", "Good"];
+                        var new_offers = [];
+                        for (const o of offers) {
+                            if (o !== offer) {
+                                new_offers.push(o);
+                            }
+                        }
+                        var new_offer = new_offers[Math.floor(Math.random()*new_offers.length)];
+
+                        return { response: 'rejected', offer: offer, final_offer: new_offer };
+                    }
+                },
             }
         }
     });
@@ -192,14 +243,32 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 frame: 'result.htm',
                 timer: settings.bidTime,
                 cb: function() {
-                    W.write(' Your ' + '' + ' offer was accepted.', W.gid('container'));
+                    node.on.data('offer', function(msg) {
+                        // this.offer = msg.data
+                        console.log("============== RESPONDER RECEIVED");
+                        console.log(msg);
+                        let data = msg.data;
+
+                        W.write('Your ' + data.offer + ' offer was ' + data.status + '.', W.gid('container'));
+                    });
                 }
             },
             OBSERVER: {
                 frame: 'result.htm',
                 timer: settings.bidTime,
                 cb: function() {
-                    W.write(' You accepted a ' + '' + ' offer.', W.gid('container'));
+                    node.on.data('offer', function(msg) {
+                        // this.offer = msg.data
+                        console.log("============== RESPONDER RECEIVED");
+                        console.log(msg);
+                        let data = msg.data;
+
+                        if (data.status === "accepted") {
+                            W.write('You accepted a ' + data.offer + ' offer.', W.gid('container'));
+                        } else {
+                            W.write('You rejected the offer. You got a ' + data.final_offer + ' result.', W.gid('container'));
+                        }
+                    });
                 }
             }
         }
